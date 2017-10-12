@@ -112,6 +112,10 @@ function handleUncompressed(res, _write, _end, callback) {
     } catch (e) {
       body = buffer.toBuffer().toString();
       console.log('JSON.parse error:', e);
+      _write.call(res, buffer.toBuffer());
+      _end.call(res);
+      callback({});
+      return;
     }
 
     // Custom modified logic
